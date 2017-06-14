@@ -1,7 +1,6 @@
-import angular from 'angular';
 import { Task2Module } from './task2.module';
 import './words.component.html';
-import './words.component.css';
+import './words.component.less';
 
 
 export const WordsComponent = angular
@@ -11,23 +10,15 @@ export const WordsComponent = angular
            words: '<'
         },
         templateUrl: 'app/task2/words.component.html',
-        controller: ['$log', '$document', function ($log, $document) {
-            //let words = this.words = [];
-            let currentWord = this.currentWord = undefined;
-            let currentWordIndex = this.currentWordIndex = 0;
+        controller: ['$log', '$scope', '$document', function ($log, $scope, $document) {
+            this.currentWordIndex = 0;
 
-            this.$onInit = function () {
-                $log.log('words', this.words);
-                currentWord = this.words[currentWordIndex];
-            };
 
-            this.$postLink = function () {
-                angular.element($document).on('keydown', function (e) {
-                    $log.log(e.which);
+            this.$postLink = () => {
+                angular.element($document).on('keydown', (e) => {
                     if (e.which === 32) {
-                        currentWordIndex++;
-                        $log.log(currentWordIndex);
-                        currentWord = this.words[currentWordIndex];
+                        this.currentWordIndex = this.currentWordIndex + 1 < this.words.length ? this.currentWordIndex + 1 : 0;
+                        $scope.$apply();
                     }
                 });
             };

@@ -6,7 +6,8 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: {
-        app: path.resolve(__dirname, './src/app.js')
+        app: path.resolve(__dirname, './src/app.js'),
+        vendor: ['angular']
     },
     output: {
         path: path.resolve(__dirname, './src/dist'),
@@ -28,6 +29,12 @@ module.exports = {
             {
                 test: /\.html$/,
                 loader: "raw-loader"
+            },
+            {
+                test: /\.less$/,
+                use: ExtractTextPlugin.extract({
+                    use: 'css-loader!less-loader'
+                })
             }
         ]
     },

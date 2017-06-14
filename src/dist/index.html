@@ -4,18 +4,25 @@
     <meta charset="UTF-8">
     <title>SkyEng test task</title>
     <link rel="stylesheet" href="dist/styles.css">
+    <script src="dist/vendor.bundle.js"></script>
     <script src="dist/app.bundle.js"></script>
-</head>
+<link href="styles.css" rel="stylesheet"></head>
 <body ng-controller="AppController">
 
 
 <div>
     <h3>Task #1</h3>
+    <app>
+        <exercise on-init="registerExercise()"></exercise>
+        <exercise></exercise>
+        <exercise></exercise>
+        <counter-widget exercises="$ctrl.exercises"></counter-widget>
+    </app>
 </div>
 
 <div>
     <h3>Task #2</h3>
-    <words></words>
+    <words words="words"></words>
 </div>
-<script type="text/javascript" src="app.bundle.js"></script></body>
+<script type="text/javascript" src="app.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script></body>
 </html>
